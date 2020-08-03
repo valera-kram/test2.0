@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, InputLabel, Input, FormHelperText, FormControl, Button } from "@material-ui/core";
+import {
+  Box,
+  InputLabel,
+  Input,
+  FormHelperText,
+  FormControl,
+  Button,
+} from "@material-ui/core";
 
 import _trim from "lodash/trim";
 
@@ -11,7 +18,7 @@ const checkEmptyString = (str) => {
   return !!str.replace(/\s/g, "").length;
 };
 
-class SignIn extends React.PureComponent {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -128,11 +135,7 @@ class SignIn extends React.PureComponent {
   };
 }
 
-const mapStateToProps = (state) => {
-  return { authorization: state.authorization };
-};
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   createSession,
   setError,
 })(SignIn);

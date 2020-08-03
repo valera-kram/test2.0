@@ -8,7 +8,7 @@ import { deleteSession } from "../actions/sessionsActions";
 import { setError } from "../actions/errorsAction";
 import history from "../history";
 
-class UserProfile extends React.PureComponent {
+class UserProfile extends React.Component {
   componentDidMount = () => {
     sessionService
       .loadSession()
@@ -69,7 +69,6 @@ class UserProfile extends React.PureComponent {
 const mapStateToProps = (state) => {
   if (state.profile) {
     return {
-      // access_token: state.authorization.createdSession.access_token,
       profile: state.profile.user,
       error: state.error,
     };
