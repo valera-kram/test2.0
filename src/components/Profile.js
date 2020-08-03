@@ -18,7 +18,9 @@ class UserProfile extends React.Component {
             this.props.setError(error).then(() => {
               if (this.props.error.type === "access_token_invalid") {
                 sessionService.deleteSession().then(() => {
-                  this.props.history.push("/signin");
+                  this.props.deleteSession().then(() => {
+                    history.push("/signin");
+                  });
                 });
               }
             });
