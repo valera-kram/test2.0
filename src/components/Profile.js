@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Box, Button } from "@material-ui/core";
 import { sessionService } from "redux-react-session";
 import { connect } from "react-redux";
 
-import { getProfile } from "../actions/profileAction";
+import { getProfile, clearLocalProfile } from "../actions/profileAction";
 import { deleteSession } from "../actions/sessionsActions";
 import { setError } from "../actions/errorsAction";
 import history from "../history";
@@ -32,16 +32,16 @@ class UserProfile extends React.Component {
   };
 
   renderUserProfile = () => {
-    const { profile } = this.props;
+    const { user } = this.props.profile;
 
     return (
       <Card style={{ maxWidth: 300 }}>
         <CardContent>
-          <Typography variant="h5">First name: {profile.first_name}</Typography>
+          <Typography variant="h5">First name: {user.first_name}</Typography>
           <hr />
-          <Typography variant="h5">Last name: {profile.last_name}</Typography>
+          <Typography variant="h5">Last name: {user.last_name}</Typography>
           <hr />
-          <Typography variant="h5">Phone: {profile.phone}</Typography>
+          <Typography variant="h5">Phone: {user.phone}</Typography>
         </CardContent>
       </Card>
     );
@@ -49,7 +49,7 @@ class UserProfile extends React.Component {
 
   onSignOut = () => {
     this.props.deleteSession().then(() => {
-      history.push("/signin");
+      this.props.clearLocalProfile().then(() => history.push("/signin"));
     });
   };
 
@@ -57,7 +57,7 @@ class UserProfile extends React.Component {
     return (
       <Box>
         <h1>Your profile!</h1>
-        {this.renderUserProfile()}
+        {this.props.profile.user.id && this.renderUserProfile()}
         <Box pl={10} pr={10} pt={4} pb={5}>
           <Button variant="contained" color="primary" onClick={this.onSignOut}>
             Sign Out
@@ -69,16 +69,15 @@ class UserProfile extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  if (state.profile) {
-    return {
-      profile: state.profile.user,
-      error: state.error,
-    };
-  }
+  return {
+    profile: state.profile,
+    error: state.error,
+  };
 };
 
 export default connect(mapStateToProps, {
   getProfile,
+  clearLocalProfile,
   deleteSession,
   setError,
 })(UserProfile);

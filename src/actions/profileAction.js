@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getProfileRoutine } from "./index";
+import { getProfileRoutine, clearLocalProfileRoutine } from "./index";
 import { getThunkActionCreator } from "redux-thunk-routine";
 
 export const getProfile = getThunkActionCreator(
@@ -10,5 +10,12 @@ export const getProfile = getThunkActionCreator(
         access_token,
       },
     });
+  }
+);
+
+export const clearLocalProfile = getThunkActionCreator(
+  clearLocalProfileRoutine,
+  async () => {
+    return await true;
   }
 );
