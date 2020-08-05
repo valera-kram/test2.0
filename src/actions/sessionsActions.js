@@ -48,8 +48,4 @@ export const deleteSession = () => async (dispatch) => {
   } catch (error) {
     dispatch(deleteSessionRoutine.failure(error));
   }
-
-  return {
-    type: deleteSessionRoutine,
-  };
 };
