@@ -76,7 +76,7 @@ class SignIn extends React.Component {
 
     return (
       <>
-        <Box pl={45} pr={45} pt={4} pb={5}>
+        <Box pl={35} pr={35} pt={4} pb={5} minWidth={200}>
           <FormControl fullWidth margin="dense" error={!!username.error}>
             <InputLabel htmlFor="username">E-mail or Phone</InputLabel>
             <Input

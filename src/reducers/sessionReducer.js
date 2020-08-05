@@ -3,7 +3,7 @@ import { createSessionRoutine, deleteSessionRoutine } from "../actions";
 const initialState = {
   createdSession: {
     access_token: null,
-  }
+  },
 };
 
 export default (state = initialState, action) => {

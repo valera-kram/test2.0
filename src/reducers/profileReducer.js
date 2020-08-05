@@ -1,15 +1,26 @@
-import { getProfileRoutine } from "../actions";
+import { getProfileRoutine, clearLocalProfileRoutine } from "../actions";
 
-export default (state = { user: {} }, action) => {
+const initialState = {
+  id: null,
+  firstName: "",
+  lastName: "",
+  phone: "",
+};
+
+export default (state = { user: initialState }, action) => {
   if (getProfileRoutine.isSuccessAction(action)) {
-    if (action.payload) {
-      const { data } = action.payload;
+    const { data } = action.payload;
 
-      return {
-        ...state,
-        user: data.user,
-      };
-    }
+    return {
+      ...state,
+      user: data.user,
+    };
+  }
+  if (clearLocalProfileRoutine.isSuccessAction(action)) {
+    return {
+      ...state,
+      user: initialState,
+    };
   }
   return state;
 };
