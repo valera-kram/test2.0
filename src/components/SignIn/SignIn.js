@@ -8,14 +8,14 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { withStyles } from "@material-ui/styles";
 import styles from "./SignIn.styles";
 
 import _trim from "lodash/trim";
-
 import { connect } from "react-redux";
-import { createSession } from "../actions/sessionsActions";
-import { setError } from "../actions/errorsAction";
-import { withStyles } from "@material-ui/styles";
+
+import { createSession } from "../../actions/sessionsActions";
+import { setError } from "../../actions/errorsAction";
 
 const checkEmptyString = (str) => {
   return !!str.replace(/\s/g, "").length;
@@ -84,11 +84,11 @@ class SignIn extends React.Component {
           <CssBaseline />
           <Grid item xs={false} sm={4} md={7} className={classes.image} />
           <Grid item xs={12} sm={8} md={5}>
-            <Box pl={20} pr={15} pt={20}>
-            <Typography variant="h2">Log In</Typography>
+            <Box pl={15} pr={15} pt={20}>
+              <Typography variant="h2">Log In</Typography>
             </Box>
-            <Box pl={15} pr={15} pt={5} pb={5} >
-              <FormControl fullWidt error={!!username.error}>
+            <Box pl={15} pr={15} pt={5} pb={5}>
+              <FormControl error={!!username.error}>
                 <InputLabel htmlFor="username">E-mail or Phone</InputLabel>
                 <Input
                   id="username"
@@ -108,7 +108,7 @@ class SignIn extends React.Component {
                   <FormHelperText>{username.error}</FormHelperText>
                 )}
               </FormControl>
-              <FormControl fullWidth margin="dense" error={!!password.error}>
+              <FormControl margin="dense" error={!!password.error}>
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
                   id="password"
@@ -134,7 +134,6 @@ class SignIn extends React.Component {
                   variant="contained"
                   color="primary"
                   disabled={loading}
-                  fullWidth
                   onClick={this.onNextClick}
                 >
                   Next

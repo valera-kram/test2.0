@@ -1,8 +1,8 @@
 import React from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 
-import SignIn from "./SignIn";
-import Profile from "./Profile";
+import SignIn from "./SignIn/SignIn";
+import Profile from "./Profile/Profile";
 
 import history from "../history";
 

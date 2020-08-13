@@ -1,4 +1,4 @@
-export default (theme) => ({
+export default () => ({
   error: {
     backgroundColor: "#ab3909",
   },

@@ -1,15 +1,14 @@
 import React from "react";
-import withStyles from "@material-ui/styles/withStyles";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import ErrorIcon from "@material-ui/icons/Error";
+import withStyles from "@material-ui/styles/withStyles";
+import styles from "./ErrorSnackbar.styles";
 
 import { connect } from "react-redux";
 import { hideError } from "../../actions/errorsAction";
-
-import styles from "./ErrorSnackbar.styles";
 
 class ErrorSnackbar extends React.Component {
   handleSnackbarClose = () => {

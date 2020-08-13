@@ -1,12 +1,20 @@
 import React from "react";
-import { Card, CardContent, Typography, Box, Button } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import { withStyles } from "@material-ui/styles";
+import styles from "./Profile.styles";
+
 import { sessionService } from "redux-react-session";
 import { connect } from "react-redux";
 
-import { getProfile, clearLocalProfile } from "../actions/profileAction";
-import { deleteSession } from "../actions/sessionsActions";
-import { setError } from "../actions/errorsAction";
-import history from "../history";
+import { getProfile, clearLocalProfile } from "../../actions/profileAction";
+import { deleteSession } from "../../actions/sessionsActions";
+import { setError } from "../../actions/errorsAction";
+import history from "../../history";
+
+import AppHeader from "../AppHeader/AppHeader";
 
 class UserProfile extends React.Component {
   componentDidMount = () => {
@@ -19,7 +27,9 @@ class UserProfile extends React.Component {
               if (this.props.error.type === "access_token_invalid") {
                 sessionService.deleteSession().then(() => {
                   this.props.deleteSession().then(() => {
-                    history.push("/signin");
+                    this.props.clearLocalProfile().then(() => {
+                      history.push("/signin");
+                    });
                   });
                 });
               }
@@ -33,9 +43,10 @@ class UserProfile extends React.Component {
 
   renderUserProfile = () => {
     const { user } = this.props.profile;
+    const { classes } = this.props;
 
     return (
-      <Card style={{ maxWidth: 300 }}>
+      <Card className={classes.card}>
         <CardContent>
           <Typography variant="h5">First name: {user.first_name}</Typography>
           <hr />
@@ -47,23 +58,19 @@ class UserProfile extends React.Component {
     );
   };
 
-  onSignOut = () => {
-    this.props.deleteSession().then(() => {
-      this.props.clearLocalProfile().then(() => history.push("/signin"));
-    });
-  };
-
   render() {
+    const { classes } = this.props;
+
     return (
-      <Box>
-        <h1>Your profile!</h1>
-        {this.props.profile.user.id && this.renderUserProfile()}
-        <Box pl={10} pr={10} pt={4} pb={5}>
-          <Button variant="contained" color="primary" onClick={this.onSignOut}>
-            Sign Out
-          </Button>
+      <>
+        <AppHeader />
+        <Box pl={5} pr={10} pt={4} pb={5}>
+          <Typography variant="h3" className={classes.header}>
+            Your profile!
+          </Typography>
+          {this.props.profile.user.id && this.renderUserProfile()}
         </Box>
-      </Box>
+      </>
     );
   }
 }
@@ -80,4 +87,4 @@ export default connect(mapStateToProps, {
   clearLocalProfile,
   deleteSession,
   setError,
-})(UserProfile);
+})(withStyles(styles)(UserProfile));
