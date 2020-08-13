@@ -4,10 +4,10 @@ export default () => ({
   },
   icon: {
     fontSize: 20,
-    marginRight: 10,
+    marginRight: 10
   },
   message: {
     display: "flex",
-    alignItems: "center",
+    alignItems: "center"
   },
 });

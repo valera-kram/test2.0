@@ -25,7 +25,7 @@ class AppHeader extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar>
           <Toolbar>
             <Typography variant="h4" className={classes.title}>
               Test App
