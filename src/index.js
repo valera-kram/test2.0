@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
 import { sessionService } from "redux-react-session";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { orange } from "@material-ui/core/colors";
 
 import App from "./components/App";
 import reducers from "./reducers";
@@ -17,10 +19,18 @@ const store = createStore(
 );
 sessionService.initSessionService(store);
 
+const theme = createMuiTheme({
+  status: {
+    danger: orange[500],
+  },
+});
+
 ReactDOM.render(
-  <Provider store={store}>
-    <ErrorSnackbar />
-    <App />
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <ErrorSnackbar />
+      <App />
+    </Provider>
+  </ThemeProvider>,
   document.querySelector("#root")
 );
